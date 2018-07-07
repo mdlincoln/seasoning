@@ -45,7 +45,10 @@ salt_menu <- menuItem(
 )
 
 salt_tab <- tabItem(
-  tabName = "salt_tab"
+  tabName = "salt_tab",
+  title = "Salting Options",
+  uiOutput("salt_opts"),
+  box(tableOutput("salted_table"))
 )
 
 sidebar <- dashboardSidebar(
