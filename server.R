@@ -82,8 +82,7 @@ function(input, output) {
                                               rep_p = input[[str_glue("{coln}_rep_p")]])
       } else if (salt_type == "Delete") {
         print("Deleting")
-        working_df[[coln]] <- salt_substitute(working_df[[coln]],
-                                              shaker[[input[[str_glue("{coln}_shaker")]]]],
+        working_df[[coln]] <- salt_delete(working_df[[coln]],
                                               p = input[[str_glue("{coln}_p")]],
                                               n = input[[str_glue("{coln}_n")]])
       }
