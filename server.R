@@ -96,9 +96,13 @@ function(input, output) {
 
   output$salt_opts <- renderUI({
     box(title = "Salting Options", width = 12,
-      lapply(names(uploaded_data()), column_ui)
+        downloadButton("download_salted", label = "Download salted data"),
+        lapply(names(uploaded_data()), column_ui)
     )
   })
 
-
+  output$download_salted <- downloadHandler(
+    filename = function() "salted_data.csv",
+    content = function(file) write.csv(salted_df(), file, row.names = FALSE)
+  )
 }
