@@ -5,8 +5,8 @@ library(stringr)
 
 function(input, output) {
 
-  output$contents <- renderTable({
-    uploaded_data()[1:50,]
+  output$contents <- renderDataTable({
+    uploaded_data()[1:20,]
   })
 
   # input$file1 will be NULL initially. After the user selects
@@ -36,10 +36,11 @@ function(input, output) {
   })
 
   column_ui <- function(name) {
-    tabPanel(
+    box(
       title = name,
-      value = str_glue("{name}_tabPanel"),
-      inputPanel(
+      collapsible = TRUE,
+      collapsed = TRUE,
+
         selectInput(str_glue("{name}_salter"), label = "Salt function",
                     choices = c("none", "Insert", "Substitute", "Replace", "Delete"),
                     selected = "none", multiple = FALSE),
@@ -52,7 +53,7 @@ function(input, output) {
         sliderInput(str_glue("{name}_rep_p"), label = "Proportion of characters to change",
                     min = 0, max = 1, step = 0.1, value = 0.5)
       )
-    )
+
   }
 
   salted_df <- reactive({
@@ -90,15 +91,12 @@ function(input, output) {
     working_df
   })
 
-  output$salted_table <- renderTable({
+  output$salted_table <- renderDataTable({
     salted_df()[1:20,]
   })
 
   output$salt_opts <- renderUI({
-    box(title = "Salting Options", width = 12,
-        downloadButton("download_salted", label = "Download salted data"),
-        lapply(names(uploaded_data()), column_ui)
-    )
+    lapply(names(uploaded_data()), column_ui)
   })
 
   output$download_salted <- downloadHandler(

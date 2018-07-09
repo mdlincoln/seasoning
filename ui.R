@@ -10,6 +10,8 @@ upload_menu <- menuItem(
 
 upload_tab <- tabItem(
   tabName = "upload_tab",
+  box("CSV parsing options", width = 3,
+
   # Input: Select a file ----
   fileInput("file1", "Choose CSV File",
             multiple = FALSE,
@@ -35,8 +37,8 @@ upload_tab <- tabItem(
                choices = c(None = "",
                            "Double Quote" = '"',
                            "Single Quote" = "'"),
-               selected = '"'),
-  tableOutput("contents")
+               selected = '"')),
+  box("Data preview", width = 9, dataTableOutput("contents"))
 )
 
 salt_menu <- menuItem(
@@ -48,7 +50,10 @@ salt_tab <- tabItem(
   tabName = "salt_tab",
   title = "Salting Options",
   uiOutput("salt_opts"),
-  box(tableOutput("salted_table"))
+  box(title = "Data preview", width = 12,
+      downloadButton("download_salted", label = "Download salted data"),
+      hr(),
+      dataTableOutput("salted_table"))
 )
 
 sidebar <- dashboardSidebar(
