@@ -66,8 +66,8 @@ function(input, output) {
       if (!is.null(coln_shaker) && coln_shaker != "none") {
         if (coln_shaker %in% available_shakers()$replacement_shaker) {
           working_df[[coln]] <- salt_replace(x = working_df[[coln]],
-                                             shaker[[coln_shaker]],
-                                             p = replacement_shaker[[str_glue("{coln}_p")]],
+                                             replacement_shaker[[coln_shaker]],
+                                             p = input[[str_glue("{coln}_p")]],
                                              rep_p = input[[str_glue("{coln}_n")]])
         } else {
           working_df[[coln]] <- salt_substitute(x = working_df[[coln]],
