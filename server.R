@@ -16,7 +16,7 @@ function(input, output) {
   # or all rows if selected, will be shown.
 
   uploaded_data <- reactive({
-    return(mtcars)
+    return(starter_data)
     req(input$file1)
 
     tryCatch(
