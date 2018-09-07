@@ -76,7 +76,8 @@ body <- dashboardBody(
   tabItems(
     upload_tab,
     salt_tab
-  )
+  ),
+  a("Copyright Matthew Lincoln, 2018", href = "https://github.com/mdlincoln")
 )
 
 title <- "seasoning: salt your data"
