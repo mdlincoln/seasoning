@@ -1,7 +1,7 @@
 library(shiny)
 library(shinydashboard)
 
-header <- dashboardHeader()
+header <- dashboardHeader(title = "seasoning")
 
 upload_menu <- menuItem(
   "Upload Data",
@@ -11,9 +11,9 @@ upload_menu <- menuItem(
 upload_tab <- tabItem(
   tabName = "upload_tab",
   fluidRow(
-    box("Import data", width = 12,
-
-      flowLayout(
+    box(p("This interactive web app shows off a couple of functions from", a("salty", href = "https://github.com/mdlincoln/salty"), ", an R package for dirtying your data."), p("Upload a CSV of your own data (no more than 5MB please!) or use the sample data already provided below. Then click on 'Salting Options'"), width = 6),
+    box("Import data", width = 6,
+        flowLayout(
           # Input: Select a file ----
           fileInput("file1", "Choose CSV File",
                     multiple = FALSE,
@@ -38,7 +38,8 @@ upload_tab <- tabItem(
                                    "Double Quote" = '"',
                                    "Single Quote" = "'"),
                        selected = '"')
-      ))),
+        ))
+  ),
 
   fluidRow(box("Data preview", width = 12, dataTableOutput("contents")))
 )
@@ -78,6 +79,6 @@ body <- dashboardBody(
   )
 )
 
-title <- "Salty Data"
+title <- "seasoning: salt your data"
 
 dashboardPage(header, sidebar, body, title)
