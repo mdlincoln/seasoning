@@ -16,8 +16,8 @@ function(input, output) {
   # or all rows if selected, will be shown.
 
   uploaded_data <- reactive({
-    return(starter_data)
-    req(input$file1)
+    if (is.null(input$file1))
+      return(starter_data)
 
     tryCatch(
       {
